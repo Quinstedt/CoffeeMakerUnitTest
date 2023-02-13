@@ -1,0 +1,7 @@
+
+Recipe
+
+- constructor without parameters: use of setter to add values
+- Only positive values allows
+- setter: uses String as inputs
+- uses Interger.parseInt()
