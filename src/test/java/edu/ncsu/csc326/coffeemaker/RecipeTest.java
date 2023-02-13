@@ -1,17 +1,15 @@
 package edu.ncsu.csc326.coffeemaker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.fail;
-
 import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class RecipeTest {
 
     private Recipe recipe;
-    private Recipe recipe2;
     Throwable exception;
 
 
@@ -61,7 +59,7 @@ public class RecipeTest {
             recipe.setAmtChocolate(2 + "");
             assertEquals(2, recipe.getAmtChocolate());
         }catch (RecipeException e){
-            fail(e.getMessage()); // Question should I use fail() like this?
+            fail(e.getMessage());
         }
     }
 
@@ -132,7 +130,7 @@ public class RecipeTest {
             recipe.setAmtCoffee("2");
             assertEquals(2, recipe.getAmtCoffee());
         }catch (RecipeException e){
-            fail(e.getMessage()); // Question should I use fail() like this?
+            fail(e.getMessage());
         }
     }
 
@@ -146,7 +144,7 @@ public class RecipeTest {
             recipe.setAmtCoffee(4 + "");
             assertEquals(4, recipe.getAmtCoffee());
         }catch (RecipeException e){
-            fail(e.getMessage()); // Question should I use fail() like this?
+            fail(e.getMessage());
         }
     }
 
@@ -216,7 +214,7 @@ public class RecipeTest {
             recipe.setAmtMilk("1");
             assertEquals(1, recipe.getAmtMilk());
         }catch (RecipeException e){
-            fail(e.getMessage()); // Question should I use fail() like this?
+            fail(e.getMessage());
         }
     }
 
@@ -230,7 +228,7 @@ public class RecipeTest {
             recipe.setAmtMilk(2 + "");
             assertEquals(2, recipe.getAmtMilk());
         }catch (RecipeException e){
-            fail(e.getMessage()); // Question should I use fail() like this?
+            fail(e.getMessage());
         }
     }
 
@@ -315,7 +313,7 @@ public class RecipeTest {
             recipe.setAmtSugar(2 + "");
             assertEquals(2, recipe.getAmtSugar());
         }catch (RecipeException e){
-            fail(e.getMessage()); // Question should I use fail() like this?
+            fail(e.getMessage());
         }
     }
 
@@ -373,20 +371,27 @@ public class RecipeTest {
      *  @Test ID: R22
      */
     @Test
-    public void testGetAmtName(){
+    public void testGetName(){
         assertEquals("Recipe1", recipe.getName());
     }
     /**
      *  @Test ID: R23
      */
     @Test
-    public void testSetAmtName(){
-        try{
-            recipe.setAmtSugar("1");
-            assertEquals(1, recipe.getAmtSugar());
-        }catch (RecipeException e){
-            fail(e.getMessage()); // Question should I use fail() like this?
-        }
+    public void testSetName(){
+       String newName="newRecipe";
+       recipe.setName(newName);
+       assertEquals(newName, recipe.getName());
+    }
+
+    /**
+     *  @Test ID: R24
+     */
+    @Test
+    public void testSetNameToNull(){
+        recipe.setName(null);
+        //assertNotNull(recipe.getName());     //  Q: is it better to assert the value or just to make sure it is not null ?
+        assertEquals("Recipe1", recipe.getName());
     }
 
 }
