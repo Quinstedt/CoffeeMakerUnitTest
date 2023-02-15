@@ -8,28 +8,32 @@ import static org.junit.Assert.*;
 public class RecipeTest {
 
     private Recipe recipe;
-    Recipe recipe2;
-    Throwable exception;
-    String recipeExceptionFailMessage = "RecipeException should not be thrown";
+    private Recipe recipe2;
+    private final String recipeExceptionFailMessage = "RecipeException should not be thrown";
 
 
     @Before
-    public void setUp() throws Exception {
-        recipe = new Recipe();
-        recipe.setName("Recipe1");
-        recipe.setAmtChocolate("2");
-        recipe.setAmtCoffee("4");
-        recipe.setAmtMilk("1");
-        recipe.setAmtSugar("5");
-        recipe.setPrice("50");
+    public void setUp() {
+        try{
+            recipe = new Recipe();
+            recipe.setName("Recipe1");
+            recipe.setAmtChocolate("2");
+            recipe.setAmtCoffee("4");
+            recipe.setAmtMilk("1");
+            recipe.setAmtSugar("5");
+            recipe.setPrice("50");
 
-        recipe2 = new Recipe();
-        recipe2.setName("Recipe1");
-        recipe2.setAmtChocolate("2");
-        recipe2.setAmtCoffee("4");
-        recipe2.setAmtMilk("1");
-        recipe2.setAmtSugar("5");
-        recipe2.setPrice("50");
+            recipe2 = new Recipe();
+            recipe2.setName("Recipe1");
+            recipe2.setAmtChocolate("2");
+            recipe2.setAmtCoffee("4");
+            recipe2.setAmtMilk("1");
+            recipe2.setAmtSugar("5");
+            recipe2.setPrice("50");
+
+        }catch (RecipeException e){
+            fail(recipeExceptionFailMessage);
+        }
 
     }
 
@@ -76,7 +80,7 @@ public class RecipeTest {
      */
     @Test
     public void testSetAmtChocolateNegativeValue(){
-        exception = assertThrows(
+        assertThrows(
           RecipeException.class, () -> {
               recipe.setAmtChocolate("-1");
           }
@@ -88,7 +92,7 @@ public class RecipeTest {
      */
     @Test
     public void testSetAmtChocolateToADoubleValue(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtChocolate("1.5");
                 }
@@ -101,7 +105,7 @@ public class RecipeTest {
      */
     @Test
     public void testSetAmtChocolateNegativeInt(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtChocolate(-1 + "");
                 }
@@ -112,7 +116,7 @@ public class RecipeTest {
      */
     @Test
     public void testSetAmtChocolateToChar(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtChocolate("a");
                 }
@@ -123,9 +127,20 @@ public class RecipeTest {
      */
     @Test
     public void testSetAmtChocolateToEmpty(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtChocolate("");
+                }
+        );
+    }
+    /**
+     *  @Test ID: R9
+     */
+    @Test
+    public void testSetAmtChocolateToNull(){
+        assertThrows(
+                RecipeException.class, () -> {
+                    recipe.setAmtCoffee(null);
                 }
         );
     }
@@ -136,14 +151,15 @@ public class RecipeTest {
 
 
     /**
-     *  @Test ID: R9
+     *  @Test ID: R10
      */
     @Test
     public void testGetAmtCoffee(){
         assertEquals(4, recipe.getAmtCoffee());
     }
+
     /**
-     *  @Test ID: R10
+     *  @Test ID: R11
      */
     @Test
     public void testSetAmtCoffee(){
@@ -156,7 +172,7 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R11
+     *  @Test ID: R12
      *  Testing this format due the use of parseINT
      */
     @Test
@@ -170,36 +186,25 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R12
+     *  @Test ID: R13
      */
     @Test
     public void testSetAmtCoffeeNegativeValue(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtCoffee("-1");
                 }
         );
     }
     /**
-     *  @Test ID: R13
+     *  @Test ID: R14
      *  Testing this format due the use of parseINT
      */
     @Test
     public void testSetAmtCoffeeNegativeInt(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtCoffee(-1 + "");
-                }
-        );
-    }
-    /**
-     *  @Test ID: R14
-     */
-    @Test
-    public void testSetAmtCoffeeToChar(){
-        exception = assertThrows(
-                RecipeException.class, () -> {
-                    recipe.setAmtCoffee("a");
                 }
         );
     }
@@ -207,12 +212,48 @@ public class RecipeTest {
      *  @Test ID: R15
      */
     @Test
+    public void testSetAmtCoffeeToADoubleValue(){
+        assertThrows(
+                RecipeException.class, () -> {
+                    recipe.setAmtCoffee("1.5");
+                }
+        );
+    }
+
+    /**
+     *  @Test ID: R16
+     */
+    @Test
+    public void testSetAmtCoffeeToChar(){
+        assertThrows(
+                RecipeException.class, () -> {
+                    recipe.setAmtCoffee("a");
+                }
+        );
+    }
+    /**
+     *  @Test ID: R17
+     */
+    @Test
     public void testSetAmtCoffeeToEmpty(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtCoffee("");
                 }
         );
+    }
+
+    /**
+     *  @Test ID: R18
+     */
+    @Test
+    public void testSetAmtCoffeeToNull(){
+        assertThrows(
+                RecipeException.class, () -> {
+                    recipe.setAmtCoffee(null);
+                }
+        );
+
     }
 
 /**
@@ -220,14 +261,15 @@ public class RecipeTest {
  */
 
     /**
-     *  @Test ID: R16
+     *  @Test ID: R19
      */
     @Test
     public void testGetAmtMilk(){
         assertEquals(1, recipe.getAmtMilk());
     }
+
     /**
-     *  @Test ID: R17
+     *  @Test ID: R20
      */
     @Test
     public void testSetAmtMilk(){
@@ -240,7 +282,7 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R18
+     *  @Test ID: R21
      *  Testing this format due the use of parseINT
      */
     @Test
@@ -254,11 +296,11 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R19
+     *  @Test ID: R22
      */
     @Test
     public void testSetAmtMilkNegativeValue(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtMilk("-1");
                 }
@@ -266,11 +308,11 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R20
+     *  @Test ID: R23
      */
     @Test
     public void testSetAmtMilkToADoubleValue(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtMilk("1.5");
                 }
@@ -278,54 +320,66 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R21
+     *  @Test ID: R24
      *  Testing this format due the use of parseINT
      */
     @Test
     public void testSetAmtMilkNegativeInt(){
-        exception = assertThrows(
+        assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtMilk(-1 + "");
                 }
         );
     }
     /**
-     *  @Test ID: R22
+     *  @Test ID: R25
      */
     @Test
     public void testSetAmtMilkToChar(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtMilk("a");
                 }
         );
     }
     /**
-     *  @Test ID: R23
+     *  @Test ID: R26
      */
     @Test
     public void testSetAmtMilkToEmpty(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtMilk("");
                 }
         );
     }
 
+    /**
+     *  @Test ID: R27
+     */
+    @Test
+    public void testSetAmtMilkToNull(){
+         assertThrows(
+                RecipeException.class, () -> {
+                    recipe.setAmtMilk(null);
+                }
+        );
+
+    }
 
 /**
             **** Test Sugar attribute set and get functions  ****
  */
 
     /**
-     *  @Test ID: R24
+     *  @Test ID: R28
      */
     @Test
     public void testGetAmtSugar(){
         assertEquals(5, recipe.getAmtSugar());
     }
     /**
-     *  @Test ID: R25
+     *  @Test ID: R29
      */
     @Test
     public void testSetAmtSugar(){
@@ -338,7 +392,7 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R26
+     *  @Test ID: R30
      *  Testing this format due the use of parseINT
      */
     @Test
@@ -352,11 +406,11 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R27
+     *  @Test ID: R31
      */
     @Test
     public void testSetAmtSugarNegativeValue(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtSugar("-1");
                 }
@@ -364,11 +418,11 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R28
+     *  @Test ID: R32
      */
     @Test
     public void testSetAmtSugarDoubleValue(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtSugar("1.5");
                 }
@@ -376,38 +430,51 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R29
+     *  @Test ID: R33
      *  Testing this format due the use of parseINT
      */
     @Test
     public void testSetAmtSugarNegativeInt(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtSugar(-1 + "");
                 }
         );
     }
     /**
-     *  @Test ID: R30
+     *  @Test ID: R34
      */
     @Test
     public void testSetAmtSugarToChar(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtSugar("a");
                 }
         );
     }
     /**
-     *  @Test ID: R31
+     *  @Test ID: R35
      */
     @Test
     public void testSetAmtSugarToEmpty(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setAmtSugar("");
                 }
         );
+    }
+
+    /**
+     *  @Test ID: R36
+     */
+    @Test
+    public void testSetAmtSugarToNull(){
+         assertThrows(
+                RecipeException.class, () -> {
+                    recipe.setAmtSugar(null);
+                }
+        );
+
     }
 
 /**
@@ -415,14 +482,14 @@ public class RecipeTest {
  */
 
     /**
-     *  @Test ID: R32
+     *  @Test ID: R37
      */
     @Test
     public void testGetName(){
         assertEquals("Recipe1", recipe.getName());
     }
     /**
-     *  @Test ID: R33
+     *  @Test ID: R38
      */
     @Test
     public void testSetName(){
@@ -432,7 +499,7 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R34
+     *  @Test ID: R39
      */
     @Test
     public void testSetNameToNull(){
@@ -441,12 +508,13 @@ public class RecipeTest {
         assertEquals("Recipe1", recipe.getName());
     }
 
+
 /**
             **** Test Price attribute set and get functions ****
  */
 
     /**
-     *  @Test ID: R35
+     *  @Test ID: R40
      */
     @Test
     public void testGetPrice(){
@@ -454,7 +522,7 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R36
+     *  @Test ID: R41
      */
     @Test
     public void testSetPrice() {
@@ -468,8 +536,7 @@ public class RecipeTest {
 
 
     /**
-     *  @Test ID: R37
-     *  Testing this format due the use of parseINT
+     *  @Test ID: R42
      */
     @Test
     public void testSetAmtPricePositiveInt(){
@@ -482,11 +549,11 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R38
+     *  @Test ID: R43
      */
     @Test
     public void testSetAmtPriceNegativeValue(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setPrice("-10");
                 }
@@ -494,11 +561,11 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R39
+     *  @Test ID: R44
      */
     @Test
     public void testSetAmtPriceDoubleValue(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setPrice("45.5");
                 }
@@ -506,45 +573,58 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R40
+     *  @Test ID: R45
      *  Testing this format due the use of parseINT
      */
     @Test
     public void testSetAmtPriceNegativeInt(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setPrice(-1 + "");
                 }
         );
     }
     /**
-     *  @Test ID: R41
+     *  @Test ID: R46
      */
     @Test
     public void testSetAmtPriceToChar(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setPrice("a");
                 }
         );
     }
     /**
-     *  @Test ID: R42
+     *  @Test ID: R47
      */
     @Test
     public void testSetAmtPriceToEmpty(){
-        exception = assertThrows(
+         assertThrows(
                 RecipeException.class, () -> {
                     recipe.setPrice("");
                 }
         );
+    }
+
+    /**
+     *  @Test ID: R48
+     */
+    @Test
+    public void testSetAmtPriceToNull(){
+         assertThrows(
+                RecipeException.class, () -> {
+                    recipe.setPrice(null);
+                }
+        );
+
     }
 /**
             **** Test Recipe class functions  ****
  */
 
     /**
-     *  @Test ID: R43
+     *  @Test ID: R49
      */
     @Test
     public void testToString() {
@@ -552,21 +632,17 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R44               Q: which alternative? Does it even matter?
+     *  @Test ID: R50               Q: which alternative? Does it even matter?
      */
     @Test
     public void testToHashCode(){
-
-        // Alternative 1
-        assertTrue(recipe.equals(recipe2) && recipe2.equals(recipe));
-        // Alternative 2
         assertNotSame(recipe, recipe2);
         assertEquals(recipe.hashCode(), recipe2.hashCode());
 
     }
 
     /**
-     *  @Test ID: R45
+     *  @Test ID: R51
      */
     @Test
     public void testEquals(){
@@ -574,31 +650,66 @@ public class RecipeTest {
     }
 
     /**
-     *  @Test ID: R46
+     *  @Test ID: R52
      */
     @Test
-    public void testEqualsNull(){
-        recipe2 = null;
-        assertFalse(recipe.equals(recipe2));
+    public void testEqualsReturnTrueSameNameDiffPrice(){
+        try{
+            recipe.setPrice("80");
+        }catch (RecipeException e){
+            fail(recipeExceptionFailMessage);
+        }
+
+        assertTrue(recipe.equals(recipe2));
     }
 
     /**
-     *  @Test ID: R47
+     *  @Test ID: R53           Notation: Question should this check be in the equals method or
+     *      Discuss: assert true or assert false. Dependence on where the check should be for it.
      */
     @Test
-    public void testEqualsReturnFalse(){
+    public void testEqualsCheckRecipeWithSameValueButDiffName(){
         recipe2.setName("Choco");
         assertFalse(recipe.equals(recipe2));
     }
 
+
     /**
-     *  @Test ID: R48
+     *  Going beyond with the equals method
+     *  Try to get 100% line coverage - Result: not possible Max 97%.
+     *  Name is never null - so the last two lines are never executed
+     */
+
+
+    /**
+     *  @Test ID: R54
      */
     @Test
-    public void testEqualsReturnTrueSameNameDiffPrice() throws RecipeException{
-        recipe.setPrice("80");
-        assertTrue(recipe.equals(recipe2));
+    public void testEqualsRecipeIsNull(){
+        recipe2 = null;
+        assertFalse(recipe.equals(recipe2));
     }
+
+
+    /**
+     *  @Test ID: R55
+     */
+    @Test
+    public void testEqualsIfThisEqualsObj() {
+        assertTrue(recipe.equals(recipe));
+    }
+
+    /**
+     *  @Test ID: R56
+     */
+    @Test
+    public void testEqualsIfObjDiffClass(){
+        RecipeBook recipeBook = new RecipeBook();
+        assertFalse(recipe.equals(recipeBook));
+    }
+
+
+
 
 
 

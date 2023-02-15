@@ -2,6 +2,14 @@
 Recipe
 
 - constructor without parameters: use of setter to add values
-- Only positive values allows
-- setter: uses String as inputs
-- uses Interger.parseInt()
+- Only positive int values, passed as a string (uses Interger.parseInt())
+
+ get()  (1)
+ set():
+     Normal : positive, negative, char, null, double, empty string (6)
+ ParseInt() : postive int and negative int (2)
+
+ Line coverage: Not possible in the equals function, name cannot be set to null
+ therefore there are 2 lines of code that are never executed. test 39 .
+
+ -
