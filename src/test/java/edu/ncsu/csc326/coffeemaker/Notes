@@ -13,3 +13,39 @@ Recipe
  therefore there are 2 lines of code that are never executed. test 39 .
 
  -
+CLI example:
+
+name: Java CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    - name: Run JUnit test suite
+      run: ./gradlew test --tests com.example.TestSuite
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: build/test-results
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifact
+        path: build/libs/*.jar

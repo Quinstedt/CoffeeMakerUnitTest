@@ -107,7 +107,7 @@ public class CoffeeMakerTest {
             assertSame(testRecipeBook.getRecipes()[0], coffeeMaker.getRecipes()[0]);
             assertArrayEquals(testRecipeBook.getRecipes(), coffeeMaker.getRecipes());
         } catch (RecipeException e) {
-            fail(recipeExceptionFailMessage);
+            fail(recipeExceptionFailMessage+ "\n" + e.getMessage() );
         }
     }
     /**
@@ -129,7 +129,7 @@ public class CoffeeMakerTest {
         try {
             coffeeMaker.addInventory("35","35","35","35");
         }catch (InventoryException e){
-            fail(inventoryExceptionFailMessage);
+            fail(inventoryExceptionFailMessage + "\n" + e.getMessage() );
         }
 
         String inventoryToString = "Coffee: " + "50" + "\n" + "Milk: " + "50" + "\n" +
@@ -146,7 +146,7 @@ public class CoffeeMakerTest {
             coffeeMaker.addInventory("0", "0", "0", "0");
         }
         catch (InventoryException e){
-            fail(inventoryExceptionFailMessage);
+            fail(inventoryExceptionFailMessage + "\n" + e.getMessage() );
         }
         String inventoryToString = "Coffee: " + "15" + "\n" + "Milk: " + "15" + "\n" +
                 "Sugar: " + "15" + "\n" + "Chocolate: " + "15" + "\n";
@@ -159,11 +159,11 @@ public class CoffeeMakerTest {
      *  @Test ID: CM8
      */
     @Test
-    public void testAddInventoryOnlyOneValidValueRestAreEmpty() {
-        assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("50","","",""));
-        assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("","50","",""));
-        assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("","","50",""));
-        assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("","","","50"));
+    public void testAddInventoryWithOneEmptyValue() {
+        assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("", "50", "50", "50"));
+        assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("50", "", "50", "50"));
+        assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("50", "50", "", "50"));
+        assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("50", "50", "50", ""));
     }
 
     /**
@@ -197,7 +197,7 @@ public class CoffeeMakerTest {
      *  @Test ID: CM11
      */
     @Test
-    public void testAddInventoryEmptyValues() {
+    public void testAddInventoryWithACharValue() {
         // All char
         assertThrows(InventoryException.class, () -> coffeeMaker.addInventory("a","-a","a","a"));
         // One char
@@ -239,6 +239,7 @@ public class CoffeeMakerTest {
 
     /**
      *  @Test ID: CM15
+     *
      */
     @Test
     public void testMakeCoffeeNegativeAmtPaid(){
@@ -251,7 +252,7 @@ public class CoffeeMakerTest {
      *  @Test ID: CM16
      */
     @Test
-    public void testMakeCoffeeInvalidRecipeIndex(){
+    public void testMakeCoffeeWithARecipeThatDontExist(){
         coffeeMaker.addRecipe(recipe);
         amtPaid = 100;
         assertEquals(amtPaid,coffeeMaker.makeCoffee(4,amtPaid));
@@ -271,6 +272,28 @@ public class CoffeeMakerTest {
         amtPaid = 100;;
         change = amtPaid - recipe.getPrice();
         assertEquals(amtPaid, coffeeMaker.makeCoffee(0, amtPaid));
+
+    }
+
+    /**
+     *  @Test ID: CM18
+     */
+    @Test
+    public void testInventoryAfterMakeCoffee(){
+
+        coffeeMaker.addRecipe(recipe);
+        amtPaid = 100;
+        change = amtPaid - recipe.getPrice();
+        int defaultInventory = 15;
+        int coffee =  defaultInventory - recipe.getAmtCoffee();
+        int milk = defaultInventory - recipe.getAmtMilk();
+        int choco = defaultInventory - recipe.getAmtChocolate();
+        int sugar = defaultInventory - recipe.getAmtSugar();
+        String inventoryToString = "Coffee: " + coffee + "\n" + "Milk: " + milk + "\n" +
+                "Sugar: " + sugar + "\n" + "Chocolate: " + choco + "\n";
+
+        coffeeMaker.makeCoffee(0,100);
+        assertEquals(inventoryToString, coffeeMaker.checkInventory());
 
     }
 
