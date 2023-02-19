@@ -23,6 +23,15 @@ public class RecipeTest {
             recipe.setAmtSugar("5");
             recipe.setPrice("50");
 
+            recipe2 = new Recipe();
+            recipe2.setName("Recipe1");
+            recipe2.setAmtChocolate("2");
+            recipe2.setAmtCoffee("4");
+            recipe2.setAmtMilk("1");
+            recipe2.setAmtSugar("5");
+            recipe2.setPrice("50");
+
+
         }catch (RecipeException e){
             fail(recipeExceptionFailMessage);
         }
@@ -460,18 +469,7 @@ public class RecipeTest {
      */
     @Test
     public void testToHashCode(){
-        Recipe recipe2 = new Recipe();
-        try{
-            recipe2.setName("Recipe1");
-            recipe2.setAmtChocolate("2");
-            recipe2.setAmtCoffee("4");
-            recipe2.setAmtMilk("1");
-            recipe2.setAmtSugar("5");
-            recipe2.setPrice("50");
 
-        }catch (RecipeException e){
-            fail(recipeExceptionFailMessage);
-        }
         assertNotSame(recipe, recipe2);
         assertEquals(recipe.hashCode(), recipe2.hashCode());
 
@@ -532,6 +530,9 @@ public class RecipeTest {
         RecipeBook recipeBook = new RecipeBook();
         assertFalse(recipe.equals(recipeBook));
     }
+
+
+
 
 
 

@@ -137,7 +137,7 @@ public class RecipeBookTest {
     public void testDeleteRecipe() {
         recipeBook.addRecipe(recipe);
         // check that the return message is the correct one
-        assertEquals(recipe.getName(), recipeBook.deleteRecipe(1));
+        assertEquals(recipe.getName(), recipeBook.deleteRecipe(0));
         // check that the recipe is not the same as before
         assertNotSame(recipe, recipeBook.getRecipes()[0]);
         // check that recipe is actually null after deletion

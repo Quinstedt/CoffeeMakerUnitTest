@@ -74,6 +74,7 @@ public class CoffeeMakerTest {
 
     /**
      *  @Test ID: CM3
+     * related to the deleteRecipe in the recipeBook
      */
     @Test
     public void testDeleteRecipe(){
@@ -123,6 +124,7 @@ public class CoffeeMakerTest {
 
     /**
      *  @Test ID: CM6
+     *  related to the add sugar method
      */
     @Test
     public void testAddInventory(){
@@ -179,6 +181,7 @@ public class CoffeeMakerTest {
 
     /**
      *  @Test ID: CM10
+     *  related to the addSugar method in the inventory
      */
     @Test
     public void testAddInventoryNegativeValues(){
@@ -240,6 +243,9 @@ public class CoffeeMakerTest {
     /**
      *  @Test ID: CM15
      *
+     *  should add a check for negative numbers
+     *  which should make the change = 0
+     *
      */
     @Test
     public void testMakeCoffeeNegativeAmtPaid(){
@@ -250,6 +256,7 @@ public class CoffeeMakerTest {
 
     /**
      *  @Test ID: CM16
+     *   fail safe, since ArrayIndexOutOfBoundsException is thrown
      */
     @Test
     public void testMakeCoffeeWithARecipeThatDontExist(){
@@ -277,6 +284,8 @@ public class CoffeeMakerTest {
 
     /**
      *  @Test ID: CM18
+     *
+     *  Issue related to the addSugar test in the inventory
      */
     @Test
     public void testInventoryAfterMakeCoffee(){
