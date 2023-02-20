@@ -240,6 +240,7 @@ public class CoffeeMakerTest {
         assertEquals(amtPaid, coffeeMaker.makeCoffee(0, amtPaid));
     }
 
+
     /**
      *  @Test ID: CM15
      *

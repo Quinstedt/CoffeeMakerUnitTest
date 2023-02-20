@@ -66,7 +66,7 @@ public class InventoryTest {
             fail(inventoryExceptionFailMessage + "\n" + e.getMessage() );
         }
 
-        assertEquals(testInvetory.getChocolate() + 50, inventory.getChocolate());
+        assertEquals(65, inventory.getChocolate());
     }
 
     /**
