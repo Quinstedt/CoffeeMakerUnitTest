@@ -22,7 +22,6 @@ public class CoffeeMakerTest {
     private final String recipeExceptionFailMessage = "RecipeException should not be thrown";
     private final String inventoryExceptionFailMessage = "InventoryException should not be thrown";
 
-
     @Before
     public void setUp(){
         coffeeMaker = new CoffeeMaker();
@@ -31,7 +30,7 @@ public class CoffeeMakerTest {
         change = 0;
         amtPaid = 0;
 
-        try{
+        try {
             recipe = new Recipe();
             recipe.setName("Recipe1");
             recipe.setAmtChocolate("2");
@@ -42,18 +41,16 @@ public class CoffeeMakerTest {
 
             recipe2 = new Recipe();
 
-        } catch (RecipeException e){
+        } catch(RecipeException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 
     /**
      *  @Test ID: CM1
      */
     @Test
-    public void testGetRecipe(){
+    public void testGetRecipe() {
         coffeeMaker.addRecipe(recipe);
         coffeeMaker.addRecipe(recipe2);
         testRecipeBook.getRecipes()[0] = recipe;
@@ -65,11 +62,10 @@ public class CoffeeMakerTest {
      *  @Test ID: CM2
      */
     @Test
-    public void testAddRecipe(){
+    public void testAddRecipe() {
         assertTrue(coffeeMaker.addRecipe(recipe));
         testRecipeBook.getRecipes()[0] = recipe;
         assertArrayEquals(testRecipeBook.getRecipes(), coffeeMaker.getRecipes());
-
     }
 
     /**
@@ -77,7 +73,7 @@ public class CoffeeMakerTest {
      * related to the deleteRecipe in the recipeBook
      */
     @Test
-    public void testDeleteRecipe(){
+    public void testDeleteRecipe() {
         coffeeMaker.addRecipe(recipe);
         //check that the return message is the correct one
         assertEquals(recipe.getName(),coffeeMaker.deleteRecipe(0));
@@ -93,7 +89,6 @@ public class CoffeeMakerTest {
     @Test
     public void testEditRecipe() {
         coffeeMaker.addRecipe(recipe);
-
         try {
             recipe2.setName("newRecipe");
             recipe2.setAmtCoffee("3");
@@ -107,10 +102,11 @@ public class CoffeeMakerTest {
             System.out.println(testRecipeBook.getRecipes()[0].getName() + " :  "+ coffeeMaker.getRecipes()[0].getName());
             assertSame(testRecipeBook.getRecipes()[0], coffeeMaker.getRecipes()[0]);
             assertArrayEquals(testRecipeBook.getRecipes(), coffeeMaker.getRecipes());
-        } catch (RecipeException e) {
+        } catch(RecipeException e) {
             fail(recipeExceptionFailMessage+ "\n" + e.getMessage() );
         }
     }
+
     /**
      *  @Test ID: CM5
      */
@@ -118,7 +114,6 @@ public class CoffeeMakerTest {
     public void testCheckInventory(){
         String inventoryToString = "Coffee: " + "15" + "\n" + "Milk: " + "15" + "\n" +
                 "Sugar: " + "15" + "\n" + "Chocolate: " + "15" + "\n";
-
         assertEquals(inventoryToString, coffeeMaker.checkInventory());
     }
 
@@ -127,10 +122,10 @@ public class CoffeeMakerTest {
      *  related to the add sugar method
      */
     @Test
-    public void testAddInventory(){
+    public void testAddInventory() {
         try {
             coffeeMaker.addInventory("35","35","35","35");
-        }catch (InventoryException e){
+        } catch (InventoryException e) {
             fail(inventoryExceptionFailMessage + "\n" + e.getMessage() );
         }
 
@@ -146,8 +141,7 @@ public class CoffeeMakerTest {
     public void testAddInventoryWithZero() {
         try {
             coffeeMaker.addInventory("0", "0", "0", "0");
-        }
-        catch (InventoryException e){
+        } catch (InventoryException e) {
             fail(inventoryExceptionFailMessage + "\n" + e.getMessage() );
         }
         String inventoryToString = "Coffee: " + "15" + "\n" + "Milk: " + "15" + "\n" +
@@ -195,7 +189,6 @@ public class CoffeeMakerTest {
 
     }
 
-
     /**
      *  @Test ID: CM11
      */
@@ -214,7 +207,7 @@ public class CoffeeMakerTest {
      *  @Test ID: CM12
      */
     @Test
-    public void testMakeCoffee(){
+    public void testMakeCoffee() {
         coffeeMaker.addRecipe(recipe);
         amtPaid = 100;
         change = amtPaid - recipe.getPrice();
@@ -225,7 +218,7 @@ public class CoffeeMakerTest {
      *  @Test ID: CM13
      */
     @Test
-    public void testMakeCoffeeRecipeDontExist(){
+    public void testMakeCoffeeRecipeDontExist() {
         amtPaid = 100;
         assertEquals(amtPaid, coffeeMaker.makeCoffee(0, amtPaid));
     }
@@ -234,7 +227,7 @@ public class CoffeeMakerTest {
      *  @Test ID: CM14
      */
     @Test
-    public void testMakeCoffeeAmtPaidLessThanPrice(){
+    public void testMakeCoffeeAmtPaidLessThanPrice() {
         coffeeMaker.addRecipe(recipe);
         amtPaid = 10;
         assertEquals(amtPaid, coffeeMaker.makeCoffee(0, amtPaid));
@@ -243,21 +236,16 @@ public class CoffeeMakerTest {
 
     /**
      *  @Test ID: CM15
-     *
-     *  should add a check for negative numbers
-     *  which should make the change = 0
-     *
      */
     @Test
-    public void testMakeCoffeeNegativeAmtPaid(){
+    public void testMakeCoffeeNegativeAmtPaid() {
         coffeeMaker.addRecipe(recipe);
-        amtPaid = -5;
+        amtPaid = - 5;
         assertEquals(0, coffeeMaker.makeCoffee(0, amtPaid));
     }
 
     /**
      *  @Test ID: CM16
-     *   fail safe, since ArrayIndexOutOfBoundsException is thrown
      */
     @Test
     public void testMakeCoffeeWithARecipeThatDontExist(){
@@ -277,20 +265,16 @@ public class CoffeeMakerTest {
         inventory.setMilk(0);
         inventory.setSugar(0);
 
-        amtPaid = 100;;
+        amtPaid = 100;
         change = amtPaid - recipe.getPrice();
         assertEquals(amtPaid, coffeeMaker.makeCoffee(0, amtPaid));
-
     }
 
     /**
      *  @Test ID: CM18
-     *
-     *  Issue related to the addSugar test in the inventory
      */
     @Test
-    public void testInventoryAfterMakeCoffee(){
-
+    public void testInventoryAfterMakeCoffee() {
         coffeeMaker.addRecipe(recipe);
         amtPaid = 100;
         change = amtPaid - recipe.getPrice();
@@ -304,8 +288,5 @@ public class CoffeeMakerTest {
 
         coffeeMaker.makeCoffee(0,100);
         assertEquals(inventoryToString, coffeeMaker.checkInventory());
-
     }
-
-
 }
