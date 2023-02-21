@@ -22,9 +22,7 @@ public class InventoryTest {
     public void setUp() {
         inventory1 = new Inventory();
 
-        // inventory2 will be used to confirm that the object is static
-        // the sequence to test: create inventory1, add to inventory1, create inventory2, check if inventory2 values are the default ones(15)
-        try{
+        try {
             recipe1 = new Recipe();
             recipe1.setName("Recipe1");
             recipe1.setAmtChocolate("1");
@@ -41,7 +39,7 @@ public class InventoryTest {
             recipe2.setAmtSugar("30");
             recipe2.setPrice("50");
 
-        }catch(RecipeException e) {
+        } catch(RecipeException e) {
             fail(recipeFailMessage);
         }
     }
@@ -90,7 +88,7 @@ public class InventoryTest {
      *  @Test ID: I5
      */
     @Test
-    public void testSetChocolatePositiveInt(){
+    public void testSetChocolatePositiveInt() {
         inventory1.setChocolate(2);
         assertEquals(2, inventory1.getChocolate());
     }
@@ -99,7 +97,7 @@ public class InventoryTest {
      *  @Test ID: I6
      */
     @Test
-    public void testSetChocolateNegativeInt(){
+    public void testSetChocolateNegativeInt() {
         inventory1.setChocolate(-1);
         assertEquals(15, inventory1.getChocolate());
     }
@@ -108,8 +106,8 @@ public class InventoryTest {
      *  @Test ID: I7
      */
     @Test
-    public void testAddChocolate(){
-        try{
+    public void testAddChocolate() {
+        try {
             inventory1.addChocolate("3");
             assertEquals(18,inventory1.getChocolate());
         } catch(InventoryException e) {
@@ -121,7 +119,7 @@ public class InventoryTest {
      *  @Test ID: I8
      */
     @Test
-    public void testAddChocolateNegativeValue(){
+    public void testAddChocolateNegativeValue() {
         assertThrows(
                 InventoryException.class, () -> {
                     inventory1.addChocolate("-1");
@@ -160,12 +158,11 @@ public class InventoryTest {
      **** Tests for methods that involve coffee attribute (I10-I14) ****
      */
 
-
     /**
      *  @Test ID: I10
      */
     @Test
-    public void testSetCoffeePositiveInt(){
+    public void testSetCoffeePositiveInt() {
         inventory1.setCoffee(2);
         assertEquals(2, inventory1.getCoffee());
     }
@@ -174,7 +171,7 @@ public class InventoryTest {
      *  @Test ID: I11
      */
     @Test
-    public void testSetCoffeeNegativeInt(){
+    public void testSetCoffeeNegativeInt() {
         inventory1.setCoffee(-1);
         assertEquals(15, inventory1.getCoffee());
     }
@@ -183,7 +180,7 @@ public class InventoryTest {
      *  @Test ID: I12
      */
     @Test
-    public void testAddCoffee(){
+    public void testAddCoffee() {
         try{
             inventory1.addCoffee("3");
             assertEquals(18,inventory1.getCoffee());
@@ -196,7 +193,7 @@ public class InventoryTest {
      *  @Test ID: I13
      */
     @Test
-    public void testAddCoffeeNegativeValue(){
+    public void testAddCoffeeNegativeValue() {
         assertThrows(
                 InventoryException.class, () -> {
                     inventory1.addCoffee("-1");
@@ -204,12 +201,11 @@ public class InventoryTest {
         );
     }
 
-
     /**
      *  @Test ID: I14
      */
     @Test
-    public void testAddCoffeeInvalidStringValue(){
+    public void testAddCoffeeInvalidStringValue() {
         assertThrows(
                 InventoryException.class, () -> {
                     inventory1.addCoffee("2.5");
@@ -240,7 +236,7 @@ public class InventoryTest {
      *  @Test ID: I15
      */
     @Test
-    public void testSetMilkPositiveInt(){
+    public void testSetMilkPositiveInt() {
         inventory1.setMilk(2);
         assertEquals(2, inventory1.getMilk());
     }
@@ -249,7 +245,7 @@ public class InventoryTest {
      *  @Test ID: I16
      */
     @Test
-    public void testSetMilkNegativeInt(){
+    public void testSetMilkNegativeInt() {
         inventory1.setMilk(-1);
         assertEquals(15, inventory1.getMilk());
     }
@@ -258,8 +254,8 @@ public class InventoryTest {
      *  @Test ID: I17
      */
     @Test
-    public void testAddMilk(){
-        try{
+    public void testAddMilk() {
+        try {
             inventory1.addMilk("3");
             assertEquals(18,inventory1.getMilk());
         } catch(InventoryException e) {
@@ -271,7 +267,7 @@ public class InventoryTest {
      *  @Test ID: I18
      */
     @Test
-    public void testAddMilkNegativeValue(){
+    public void testAddMilkNegativeValue() {
         assertThrows(
                 InventoryException.class, () -> {
                     inventory1.addMilk("-1");
@@ -283,7 +279,7 @@ public class InventoryTest {
      *  @Test ID: I19
      */
     @Test
-    public void testAddMilkInvalidStringValue(){
+    public void testAddMilkInvalidStringValue() {
         assertThrows(
                 InventoryException.class, () -> {
                     inventory1.addMilk("2.5");
@@ -314,7 +310,7 @@ public class InventoryTest {
      *  @Test ID: I20
      */
     @Test
-    public void testSetSugarPositiveInt(){
+    public void testSetSugarPositiveInt() {
         inventory1.setSugar(2);
         assertEquals(2, inventory1.getSugar());
     }
@@ -323,7 +319,7 @@ public class InventoryTest {
      *  @Test ID: I21
      */
     @Test
-    public void testSetSugarNegativeInt(){
+    public void testSetSugarNegativeInt() {
         inventory1.setSugar(-1);
         assertEquals(15, inventory1.getSugar());
     }
@@ -332,8 +328,8 @@ public class InventoryTest {
      *  @Test ID: I22
      */
     @Test
-    public void testAddSugar(){
-        try{
+    public void testAddSugar() {
+        try {
             inventory1.addSugar("3");
             assertEquals(18, inventory1.getSugar());
         } catch(InventoryException e) {
@@ -344,7 +340,7 @@ public class InventoryTest {
      *  @Test ID: I23
      */
     @Test
-    public void testAddSugarNegativeValue(){
+    public void testAddSugarNegativeValue() {
         assertThrows(
                 InventoryException.class, () -> {
                     inventory1.addSugar("-1");
@@ -355,7 +351,7 @@ public class InventoryTest {
      *  @Test ID: I24
      */
     @Test
-    public void testAddSugarInvalidStringValue(){
+    public void testAddSugarInvalidStringValue() {
         assertThrows(
                 InventoryException.class, () -> {
                     inventory1.addSugar("2.5");
@@ -377,8 +373,9 @@ public class InventoryTest {
                 }
         );
     }
+
     /**
-     **** Tests for methods that involve all attribute (I25-I) ****
+     **** Tests for methods that involve all attributes (I25-I31) ****
      */
 
     /**
@@ -401,21 +398,18 @@ public class InventoryTest {
      *  @Test ID: I27
      */
     @Test
-    public void testUseIngredientsEnoughInventory(){
+    public void testUseIngredientsEnoughInventory() {
         Recipe recipe3 = new Recipe();
-        try{
+        try {
             recipe3.setName("Recipe3");
             recipe3.setAmtChocolate("10");
             recipe3.setAmtCoffee("10");
             recipe3.setAmtMilk("10");
             recipe3.setAmtSugar("10");
             recipe3.setPrice("50");
-
-        }catch(RecipeException e) {
+        } catch(RecipeException e) {
             fail(recipeFailMessage);
         }
-
-        //Inventory inventory = new Inventory();
 
         assertEquals(true, inventory1.useIngredients(recipe3));
 
@@ -433,15 +427,14 @@ public class InventoryTest {
     @Test
     public void testUseIngredientsNotEnoughInventory(){
         Recipe recipe4 = new Recipe();
-
-        try{
+        try {
             recipe4.setName("Recipe2");
             recipe4.setAmtChocolate("30");
             recipe4.setAmtCoffee("30");
             recipe4.setAmtMilk("30");
             recipe4.setAmtSugar("30");
             recipe4.setPrice("50");
-        }catch(RecipeException e) {
+        } catch(RecipeException e) {
             fail(recipeFailMessage);
         }
 
@@ -459,10 +452,9 @@ public class InventoryTest {
      *  @Test ID: I29
      */
     @Test
-    public void testToString(){
+    public void testToString() {
         String inventoryToString = "Coffee: " + "15" + "\n" + "Milk: " + "15" + "\n" +
                 "Sugar: " + "15" + "\n" + "Chocolate: " + "15" + "\n";
-
         assertEquals(inventoryToString, inventory1.toString());
     }
 
@@ -482,7 +474,7 @@ public class InventoryTest {
      *  @Test ID: I31
      */
     @Test
-    public void testInventoryIsStatic(){
+    public void testInventoryIsStatic() {
         Inventory inventory2 = new Inventory();
 
         assertEquals(15,inventory2.getChocolate());
@@ -499,9 +491,5 @@ public class InventoryTest {
         assertEquals(1,inventory1.getCoffee());
         assertEquals(1,inventory1.getMilk());
         assertEquals(1,inventory1.getSugar());
-
     }
-
-
-
 }
