@@ -15,10 +15,10 @@ public class RecipeBookTest {
 
     @Before
     public void setUp(){
-        int Max_NR_OF_RECIPES = 4;
+        int MAX_NR_OF_RECIPES = 4;
         recipeBook = new RecipeBook();
-        recipesTestArray = new Recipe[Max_NR_OF_RECIPES];
-        try{
+        recipesTestArray = new Recipe[MAX_NR_OF_RECIPES];
+        try {
             recipe = new Recipe();
             recipe.setName("Choco");
             recipe.setAmtChocolate("2");
@@ -26,22 +26,21 @@ public class RecipeBookTest {
             recipe.setAmtMilk("1");
             recipe.setAmtSugar("5");
             recipe.setPrice("50");
-
-        }catch (RecipeException e){
+        } catch (RecipeException e){
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
     }
 
+    /**
+     *  @Test ID: RB1
+     */
     @Test
     public void testGetRecipes() {
         assertArrayEquals(recipesTestArray, recipeBook.getRecipes());
     }
 
-    /** Branch coverage:
-     *  Test the case of the first if being true, resulting in exist = false
-     *  the second if statement is true, since !Exist is true
-     *  the third if statement that check if (the array has a null)  is true
-     *  and result in the return of  added = true
+    /**
+     *  @Test ID: RB2
      */
     @Test
     public void testAddRecipe() {
@@ -49,19 +48,21 @@ public class RecipeBookTest {
         recipesTestArray[0] = recipe;
         assertArrayEquals(recipesTestArray, recipeBook.getRecipes());
     }
+
+    /**
+     *  @Test ID: RB3
+     */
     @Test
     public void testSameRecipeWithDiffNameAndSameIngredient() {
-
         Recipe recipe2 = new Recipe();
-        try{
+        try {
             recipe2.setName("Choco2");
             recipe2.setAmtChocolate("2");
             recipe2.setAmtCoffee("0");
             recipe2.setAmtMilk("1");
             recipe2.setAmtSugar("5");
             recipe2.setPrice("50");
-
-        }catch (RecipeException e){
+        } catch(RecipeException e) {
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
         recipeBook.addRecipe(recipe);
@@ -71,10 +72,8 @@ public class RecipeBookTest {
         assertArrayEquals(recipesTestArray, recipeBook.getRecipes());
     }
 
-    /** Branch coverage:
-     * Test the case of the first if being false, resulting in exist = false
-     * the second if statement is false, since !Exist is false
-     * returns added = false
+    /**
+     *  @Test ID: RB4
      */
     @Test
     public void testAddRecipeThatAlreadyExist(){
@@ -83,11 +82,9 @@ public class RecipeBookTest {
         assertFalse(recipeBook.addRecipe(recipe));
         assertArrayEquals(recipesTestArray, recipeBook.getRecipes());
     }
-    /** Branch coverage:
-     * Test the case of the first if being true, resulting in exist = false
-     * the second if statement is true, since !Exist is true
-     *  the third if statement that check if (the array has a null)  is false
-     * returns added = false
+
+    /**
+     *  @Test ID: RB5
      */
     @Test
     public void testAddRecipeInFullRecipeBook() {
@@ -95,7 +92,7 @@ public class RecipeBookTest {
         Recipe recipe2 = new Recipe();
         Recipe recipe3 = new Recipe();
         Recipe recipe4 = new Recipe();
-        try{
+        try {
             recipe1.setName("recipe1");
             recipe1.setAmtChocolate("1");
             recipe2.setName("recipe2");
@@ -104,11 +101,9 @@ public class RecipeBookTest {
             recipe1.setAmtChocolate("4");
             recipe4.setName("recipe4");
             recipe1.setAmtChocolate("5");
-        }catch (RecipeException e){
+        } catch(RecipeException e) {
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
-
-
         recipeBook.addRecipe(recipe1);
         recipeBook.addRecipe(recipe2);
         recipeBook.addRecipe(recipe3);
@@ -117,22 +112,17 @@ public class RecipeBookTest {
     }
 
     /**
-     * The addRecipe is not checking if the recipe provided is null
-     * which triggers a nullPointerException.
-     * Should add a check:
-     *
-     * if(r == null){
-     *     return false;
-     * }
-     * to avoid the nullPointerException thrown .
+     *  @Test ID: RB6
      */
-
     @Test
     public void testAddRecipeWithNullValue() {
         recipe = null;
         assertFalse(recipeBook.addRecipe(recipe));
     }
 
+    /**
+     *  @Test ID: RB7
+     */
     @Test
     public void testDeleteRecipe() {
         recipeBook.addRecipe(recipe);
@@ -144,13 +134,16 @@ public class RecipeBookTest {
         assertNull(recipeBook.getRecipes()[0]);
     }
 
+    /**
+     *  @Test ID: RB8
+     */
     @Test
     public void testDeleteRecipeThatIsNull() {
         assertNull(recipeBook.deleteRecipe(3));
     }
 
     /**
-     * Code not fail-safe, it's throwing a ArrayIndexOutOfBoundsException
+     *  @Test ID: RB9
      */
     @Test
     public void testDeleteRecipeOutOfBounds() {
@@ -158,15 +151,16 @@ public class RecipeBookTest {
                 recipeBook.getRecipes().length +2
         ));
     }
+
     /**
-     * Line 78, sets the newRecipe to an empty name
+     *  @Test ID: RB10
      */
     @Test
-    public void testEditRecipe(){
+    public void testEditRecipe() {
         recipeBook.addRecipe(recipe);
         Recipe recipe1 = new Recipe();
         Recipe sameAsRecipe1 = new Recipe();
-        try{
+        try {
             sameAsRecipe1.setName("Coffee");
             sameAsRecipe1.setAmtChocolate("0");
             sameAsRecipe1.setAmtCoffee("3");
@@ -180,12 +174,9 @@ public class RecipeBookTest {
             recipe1.setAmtMilk("0");
             recipe1.setAmtSugar("1");
             recipe1.setPrice("50");
-
-
-        }catch (RecipeException e){
+        } catch(RecipeException e) {
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
-
         recipesTestArray[0] = sameAsRecipe1;
         // Check that the correct recipe was edited
         assertEquals(recipe.getName(),recipeBook.editRecipe(0,recipe1));
@@ -193,33 +184,28 @@ public class RecipeBookTest {
         assertArrayEquals(recipesTestArray, recipeBook.getRecipes());
     }
 
+    /**
+     *  @Test ID: RB11
+     */
     @Test
     public void testEditRecipeThatIsNull() {
         Recipe newRecipe = new Recipe();
-
-        try{
+        try {
             newRecipe.setName("Coffee");
             newRecipe.setAmtChocolate("0");
             newRecipe.setAmtCoffee("3");
             newRecipe.setAmtMilk("0");
             newRecipe.setAmtSugar("1");
             newRecipe.setPrice("50");
-
-        }catch (RecipeException e){
+        } catch(RecipeException e) {
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
         assertNull(recipeBook.editRecipe(0, newRecipe));
     }
 
     /**
-     * Method should check newRecipe is not null
-     * since it is a way to delete a recipe, and for that we shoudl use the delete method.
-     * Solution :
-     * if(newRecipe == null ){
-     *     return false
-     * }
+     *  @Test ID: RB12
      */
-
     @Test
     public void testEditRecipeWithNullRecipe() {
         recipeBook.addRecipe(recipe);
@@ -227,40 +213,33 @@ public class RecipeBookTest {
     }
 
     /**
-     * Method not preventing a null pointer exception for the index
-     * Solution:
-     * if( recipeToEdit > NUM_RECIPES){
-     *     return null;
-     * }
+     *  @Test ID: RB12
      */
     @Test
     public void testEditRecipeOutOfBound() {
         recipeBook.addRecipe(recipe);
-
         Recipe newRecipe = new Recipe();
-
-        try{
+        try {
             newRecipe.setName("Coffee");
             newRecipe.setAmtChocolate("0");
             newRecipe.setAmtCoffee("3");
             newRecipe.setAmtMilk("0");
             newRecipe.setAmtSugar("1");
             newRecipe.setPrice("50");
-
-        }catch (RecipeException e){
+        } catch (RecipeException e){
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
-
         assertNull(recipeBook.editRecipe(recipeBook.getRecipes().length + 2 , newRecipe));
     }
 
+    /**
+     *  @Test ID: RB13
+     */
     @Test
-    public void testEditRecipeToEqualAnExistingRecipe(){
-
+    public void testEditRecipeToEqualAnExistingRecipe() {
         Recipe recipe2 = new Recipe();
         Recipe newRecipe = new Recipe();
-
-        try{
+        try {
             recipe2.setName("Coffee2");
             recipe2.setAmtChocolate("10");
             recipe2.setAmtCoffee("5");
@@ -274,8 +253,7 @@ public class RecipeBookTest {
             newRecipe.setAmtMilk("1");
             newRecipe.setAmtSugar("5");
             newRecipe.setPrice("50");
-
-        }catch (RecipeException e){
+        } catch(RecipeException e) {
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
         recipeBook.addRecipe(recipe);
@@ -284,16 +262,16 @@ public class RecipeBookTest {
 
         assertNotEquals(recipeBook.getRecipes()[0], recipeBook.getRecipes()[1]);
         assertEquals(recipe2, recipeBook.getRecipes()[1]);
-
     }
 
+    /**
+     *  @Test ID: RB14
+     */
     @Test
-    public void testEditRecipeToEqualAnExistingRecipeWithDiffName(){
-
+    public void testEditRecipeToEqualAnExistingRecipeWithDiffName() {
         Recipe recipe2 = new Recipe();
         Recipe newRecipe = new Recipe();
-
-        try{
+        try {
             recipe2.setName("Coffee2");
             recipe2.setAmtChocolate("10");
             recipe2.setAmtCoffee("5");
@@ -307,8 +285,7 @@ public class RecipeBookTest {
             newRecipe.setAmtMilk("1");
             newRecipe.setAmtSugar("5");
             newRecipe.setPrice("5");
-
-        }catch (RecipeException e){
+        } catch(RecipeException e) {
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
         recipeBook.addRecipe(recipe);
@@ -316,16 +293,16 @@ public class RecipeBookTest {
         recipeBook.editRecipe(1,newRecipe);
 
         assertEquals(recipe2, recipeBook.getRecipes()[1]);
-
     }
 
+    /**
+     *  @Test ID: RB15
+     */
     @Test
-    public void testEditRecipeToEqualAnotherRecipeWithDiffPrice(){
-
+    public void testEditRecipeToEqualAnotherRecipeWithDiffPrice() {
         Recipe recipe2 = new Recipe();
         Recipe newRecipe = new Recipe();
-
-        try{
+        try {
             recipe2.setName("Coffee2");
             recipe2.setAmtChocolate("10");
             recipe2.setAmtCoffee("5");
@@ -339,8 +316,7 @@ public class RecipeBookTest {
             newRecipe.setAmtMilk("1");
             newRecipe.setAmtSugar("5");
             newRecipe.setPrice("1000");
-
-        }catch (RecipeException e){
+        } catch(RecipeException e) {
             fail(recipeExceptionFailMessage + "\n" + e.getMessage());
         }
         recipeBook.addRecipe(recipe);
@@ -350,10 +326,12 @@ public class RecipeBookTest {
         assertEquals(recipe2, recipeBook.getRecipes()[1]);
     }
 
+    /**
+     *  @Test ID: RB16
+     */
     @Test
-    public void testAddRecipeWithDefaultValues(){
+    public void testAddRecipeWithDefaultValues() {
         Recipe defaultRecipe = new Recipe();
         assertFalse(recipeBook.addRecipe(defaultRecipe));
     }
-
 }
